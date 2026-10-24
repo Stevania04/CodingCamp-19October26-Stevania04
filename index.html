@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Life Dashboard — Clock, Focus Timer, To-Do List, Quick Links" />
+  <title>Life Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- ── Top Bar ── -->
+  <header class="top-bar">
+    <div class="top-bar__brand">
+      ✦ Life Dashboard
+    </div>
+    <div class="top-bar__controls">
+      <!-- Theme toggle -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+        <span data-theme-val="light" title="Light mode">☀️</span>
+        <span data-theme-val="dark"  title="Dark mode">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Hero: Clock & Greeting ── -->
+  <section class="hero" aria-label="Clock and greeting">
+    <p  class="hero__greeting" id="hero-greeting">☀️ Good morning,</p>
+    <h1 class="hero__name"     id="hero-name">Friend</h1>
+    <div class="hero__time"    id="hero-time"  aria-live="polite">--:--:-- --</div>
+    <p  class="hero__date"     id="hero-date">Loading…</p>
+
+    <!-- Name editor -->
+    <div class="name-editor" role="form" aria-label="Set your name">
+      <input id="name-input" type="text" maxlength="30"
+             placeholder="Enter your name…" aria-label="Your name" />
+      <button id="name-save-btn" class="btn" aria-label="Save name">Save</button>
+    </div>
+  </section>
+
+  <!-- ── Main Grid: Timer + To-Do ── -->
+  <div class="grid grid--2 mt-4">
+
+    <!-- Focus Timer -->
+    <article class="card" aria-label="Focus timer">
+      <h2 class="card__title">⏱ Focus Timer</h2>
+      <div class="timer-wrapper">
+
+        <!-- SVG ring -->
+        <div class="timer-ring" role="timer" aria-label="Timer ring">
+          <svg viewBox="0 0 160 160" aria-hidden="true">
+            <circle class="timer-ring__bg"       cx="80" cy="80" r="70" />
+            <circle class="timer-ring__progress" cx="80" cy="80" r="70"
+                    id="timer-ring-progress"
+                    style="stroke-dasharray:439.82;stroke-dashoffset:0;" />
+          </svg>
+          <div class="timer-ring__label">
+            <span class="timer-ring__time"   id="timer-time">25:00</span>
+            <span class="timer-ring__status" id="timer-status">Ready</span>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="timer-controls">
+          <button id="timer-start" class="btn btn-primary" aria-label="Start timer">▶ Start</button>
+          <button id="timer-stop"  class="btn btn-ghost"   aria-label="Pause timer" disabled>⏸ Pause</button>
+          <button id="timer-reset" class="btn btn-ghost"   aria-label="Reset timer">↺ Reset</button>
+        </div>
+
+        <p class="timer-sessions" id="timer-sessions" aria-live="polite">
+          Sessions completed today: <span>0</span>
+        </p>
+      </div>
+    </article>
+
+    <!-- To-Do List -->
+    <article class="card" aria-label="To-do list">
+      <h2 class="card__title">✅ To-Do List</h2>
+
+      <!-- Add task -->
+      <div class="todo-input-row" role="form" aria-label="Add a new task">
+        <input id="todo-input" type="text" maxlength="120"
+               placeholder="Add a new task…" aria-label="New task" />
+        <button id="todo-add-btn" class="btn btn-primary" aria-label="Add task">Add</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="todo-filters" role="group" aria-label="Task filters">
+        <button class="filter-btn active" data-filter="all"       aria-pressed="true">All</button>
+        <button class="filter-btn"        data-filter="active"    aria-pressed="false">Active</button>
+        <button class="filter-btn"        data-filter="completed" aria-pressed="false">Completed</button>
+      </div>
+
+      <!-- Task list -->
+      <ul id="todo-list" class="todo-list" aria-label="Task list" aria-live="polite"></ul>
+
+      <!-- Stats & clear -->
+      <div class="todo-stats">
+        <span id="todo-stats-text">0 tasks remaining</span>
+        <button id="clear-completed" class="clear-btn" aria-label="Clear all completed tasks">
+          Clear completed
+        </button>
+      </div>
+    </article>
+
+  </div><!-- /grid -->
+
+  <!-- ── Quick Links ── -->
+  <article class="card mt-4" aria-label="Quick links">
+    <h2 class="card__title">🔗 Quick Links</h2>
+
+    <div id="links-grid" class="links-grid" aria-label="Favorite links"></div>
+
+    <!-- Add link form -->
+    <div class="add-link-form mt-4" role="form" aria-label="Add a new quick link">
+      <input id="link-emoji-input" type="text" maxlength="4"
+             placeholder="Emoji (optional)" aria-label="Emoji" style="max-width:140px;" />
+      <input id="link-label-input" type="text" maxlength="30"
+             placeholder="Site name" aria-label="Site name" />
+      <input id="link-url-input"   type="url"  maxlength="200"
+             placeholder="https://example.com" aria-label="URL" />
+      <button id="add-link-btn" class="btn btn-primary" aria-label="Add link">+ Add</button>
+    </div>
+  </article>
+
+</div><!-- /dashboard -->
+
+<!-- Toast container -->
+<div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
